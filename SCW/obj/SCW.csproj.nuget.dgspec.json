@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Shaukeen Khan\\Intigate Projects\\DemoAPIVS_2022\\SCWAPI\\SCW\\SCW.csproj": {}
+    "D:\\SCW\\SCW\\SCW.csproj": {}
   },
   "projects": {
-    "F:\\Shaukeen Khan\\Intigate Projects\\DemoAPIVS_2022\\SCWAPI\\SCW\\SCW.csproj": {
+    "D:\\SCW\\SCW\\SCW.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Shaukeen Khan\\Intigate Projects\\DemoAPIVS_2022\\SCWAPI\\SCW\\SCW.csproj",
+        "projectUniqueName": "D:\\SCW\\SCW\\SCW.csproj",
         "projectName": "SCW",
-        "projectPath": "F:\\Shaukeen Khan\\Intigate Projects\\DemoAPIVS_2022\\SCWAPI\\SCW\\SCW.csproj",
-        "packagesPath": "C:\\Users\\Shaukeenk\\.nuget\\packages\\",
-        "outputPath": "F:\\Shaukeen Khan\\Intigate Projects\\DemoAPIVS_2022\\SCWAPI\\SCW\\obj\\",
+        "projectPath": "D:\\SCW\\SCW\\SCW.csproj",
+        "packagesPath": "C:\\Users\\shauk\\.nuget\\packages\\",
+        "outputPath": "D:\\SCW\\SCW\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Shaukeenk\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\shauk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

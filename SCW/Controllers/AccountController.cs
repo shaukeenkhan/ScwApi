@@ -20,16 +20,7 @@ namespace SCW.Controllers
             this._accountService = accountService;
         }
 
-        [HttpPost("superuserlogin")]
-        public async Task<ActionResult> SuperUserLogin(AccountModelRequest request)
-        {
-            
-
-            BaseResponse<AccountResponseModel> response = new BaseResponse<AccountResponseModel>();
-           
-            response = await this._accountService.UserLogin(request);
-            return (new JsonResult(response));
-        }
+       
         [HttpPost("checkinstadminlogin")]
         public async Task<ActionResult> CheckInstAdminLogin(AdminSignUpModelRequest request)
         {

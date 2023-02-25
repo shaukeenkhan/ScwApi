@@ -55,6 +55,48 @@ namespace SCW.Models
         public string? CityName { get; set; }
     }
 
+
+    public class BankInfoModelRequest
+    {
+        public Int64? Id { get; set; }
+        public string? Name { get; set; }
+        public string? BankName { get; set; }
+        public string? AccountNo { get; set; }
+        public string? BranchName { get; set; }
+     
+        public string? BankLogo { get; set; }
+        [System.Text.Json.Serialization.JsonIgnore]
+        public int? OwnerId { get; set; }
+
+        public IFormFile files { get; set; }
+
+
+    }
+    public class GetBankInfoModelRequest
+    {
+        [System.Text.Json.Serialization.JsonIgnore]
+        public int? OwnerId { get; set; }
+    }
+    public class BankInfoModelResult
+    {
+        public int? Id { get; set; }
+        public string? Name { get; set; }
+        public string? BankName { get; set; }
+        public string? AccountNo { get; set; }
+        public string? BranchName { get; set; }
+        public string? BankLogo { get; set; }
+        public bool? IsDefault { get; set; }
+        public bool? IsActive { get; set; }
+
+        [System.Text.Json.Serialization.JsonIgnore]
+        public int? OwnerId { get; set; }
+
+    }
+
+
+
+
+
     public class TeamsModelRequest
     {
         public string? Flag { get; set; }

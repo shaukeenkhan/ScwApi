@@ -7,6 +7,7 @@ namespace SCW.Services
     {
         Task<BaseResponse<NoResult>> InsertUpdateInstitute(InstituteModelRequest request);
         Task<BaseResponse<InstituteModelResult>> GetInstitute(GetInstituteModelRequest request);
+        Task<BaseResponse<NoResult>> UpdateBankInfo(BankInfoModelRequest request);
         Task<BaseResponse<DropDownResult>> GetDropdownList(DropDownRequest request);
        
     }

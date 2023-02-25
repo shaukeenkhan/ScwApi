@@ -44,7 +44,19 @@ namespace SCW.Controllers
             return (new JsonResult(response));
         }
 
-       
+
+        [HttpPost]
+        [Route("updatebankinfo")]
+        [Authorize]
+        public async Task<ActionResult> UpdateBankInfo([FromForm] BankInfoModelRequest request)
+        {
+            BaseResponse<NoResult> response = new BaseResponse<NoResult>();
+            request.OwnerId = Convert.ToInt32(OwnerId);
+
+            response = await this._homeService.UpdateBankInfo(request);
+            return (new JsonResult(response));
+        }
+
         [HttpGet]
         [Route("getdropdownlist")]
         public async Task<ActionResult> GetDropdownList([FromQuery]DropDownRequest request)

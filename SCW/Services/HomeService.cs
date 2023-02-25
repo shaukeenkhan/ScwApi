@@ -124,7 +124,51 @@ namespace SCW.Services
             return baseResponse;
         }
 
-      
+        public async Task<BaseResponse<NoResult>> UpdateBankInfo(BankInfoModelRequest request)
+        {
+            BaseResponse<NoResult> response = new BaseResponse<NoResult>();
+            try
+            {
+
+                var target = Path.Combine(_hostingEnvironment.ContentRootPath, "Document");
+                Directory.CreateDirectory(target);
+
+               
+                if (request.files != null)
+                {
+                    request.BankLogo = DataTableExtensions.GetUniqueFileName(request.files.FileName);
+                    var filePath = Path.Combine(target, request.BankLogo);
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await request.files.CopyToAsync(stream);
+                    }
+                }
+
+                string[] paramName = { "@Id", "@Name", "@BankName", "@AccountNo", "@BranchName", "@BankLogo", "@OwnerId" };
+                DataTable dt = this._unitOfWork.GetDataFromStoredProcedure("[dbo].[PROC_INSERT_UPDATE_INSTITUTE]", paramName, request.Id, request.Name, request.BankName
+                    , request.AccountNo, request.BranchName, request.BankLogo, request.OwnerId);
+
+                if (dt.Rows.Count > 0)
+                {
+                    response.rs = Convert.ToInt32(dt.Rows[0]["ResponseCode"]);
+                    response.rm = Convert.ToString(dt.Rows[0]["ResponseMessage"]);
+                }
+                else
+                {
+                    response.rs = 0;
+                    response.rm = "Failed";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                response.rs = 0;
+                response.rm = "Failed";
+            }
+
+            return response;
+        }
+
 
         public async Task<BaseResponse<DropDownResult>> GetDropdownList(DropDownRequest request)
         {
