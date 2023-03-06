@@ -6,5 +6,6 @@ namespace SCW.Services.SuperAdmin
     public interface ISuperAccountService
     {
         Task<BaseResponse<AccountResponseModel>> UserLogin(AccountModelRequest request);
+        Task<BaseResponse<UserListModelResult>> GetUserList(GetUserListModelRequest request);
     }
 }

@@ -4,6 +4,7 @@ using SCW.Models.BaseClass;
 using SCW.Models;
 using SCW.Services;
 using SCW.Services.SuperAdmin;
+using Microsoft.AspNetCore.Authorization;
 
 namespace SCW.Controllers.SuperAdmin
 {
@@ -29,5 +30,17 @@ namespace SCW.Controllers.SuperAdmin
             response = await this._accountService.UserLogin(request);
             return (new JsonResult(response));
         }
+
+
+        [HttpGet]
+        [Route("getuserlist")]
+        [Authorize]
+        public async Task<ActionResult> GetUserList([FromQuery] GetUserListModelRequest request)
+        {
+            BaseResponse<UserListModelResult> response = new BaseResponse<UserListModelResult>();
+            response = await this._accountService.GetUserList(request);
+            return (new JsonResult(response));
+        }
+
     }
 }

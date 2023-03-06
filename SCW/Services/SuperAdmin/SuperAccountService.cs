@@ -35,7 +35,7 @@ namespace SCW.Services.SuperAdmin
                 if (result.Count > 0)
                 {
 
-                    var responseobj = result.Select(x => new UserList { UserId = x.UserId, FullName = x.FullName, Email = x.Email, StatusFkId = x.StatusFkId }).ToList();
+                    var responseobj = result.Select(x => new UserList { UserId = x.UserId, UserName = x.UserName, FullName = x.FullName, Email = x.Email, StatusFkId = x.StatusFkId }).ToList();
 
 
 
@@ -47,7 +47,7 @@ namespace SCW.Services.SuperAdmin
 
                         var UserDTO = result.Select(x => new UserDTO { Id = x.UserId, UserName = x.UserName, FullName = x.FullName, Email = x.Email }).FirstOrDefault();
 
-                        accountResponseModel.id_token = _tokenService.BuildAccessToken(UserDTO);
+                        accountResponseModel.id_token = _tokenService.BuildIdToken(UserDTO);
                         accountResponseModel.IsSAdmin = true;
                         accountResponseModel.userLists = responseobj;
                         //accountResponseModel.IsCustomer = result.FirstOrDefault().IsCustomer;
@@ -66,10 +66,56 @@ namespace SCW.Services.SuperAdmin
                         accountResponseModel.userLists = responseobj;
 
                         baseResponse.res = accountResponseModel;
-                        baseResponse.rs = 2;
-                        baseResponse.rm = Convert.ToString(EnumMessages.Failed);
+                        baseResponse.rs = Convert.ToInt32(result.FirstOrDefault().ResponseCode);
+                        baseResponse.rm = Convert.ToString(result.FirstOrDefault().ResponseMessage);
                     }
 
+                }
+                else
+                {
+                    baseResponse.rs = 0;
+                    baseResponse.rm = Convert.ToString(EnumMessages.No_record_found);
+                }
+            }
+            catch (Exception ex)
+            {
+                baseResponse.rs = 0;
+                baseResponse.rm = Convert.ToString(EnumMessages.Exception);
+            }
+            return baseResponse;
+        }
+
+
+        public async Task<BaseResponse<UserListModelResult>> GetUserList(GetUserListModelRequest request)
+        {
+            BaseResponse<UserListModelResult> baseResponse = new BaseResponse<UserListModelResult>();
+            try
+            {
+                string[] param = { "@currentPage", "@recordsPerPage", "@UserName" };
+                DataTable dt = this._unitOfWork.GetDataFromStoredProcedure("[dbo].[PROC_GET_INSTITUTE]", param, request.currentPage,request.recordsPerPage,request.UserName);
+
+                if (dt.Rows.Count > 0)
+                {
+
+                    List<UserListModelResult> result = DataTableExtension.ToList<UserListModelResult>(dt);
+                    result = result.Select(x => new UserListModelResult
+                    {
+                        TotalRecords = x.TotalRecords,
+                        Id = x.Id,
+                        Email = x.Email,
+                        PhoneNumber = x.PhoneNumber,
+                        UserName = x.UserName,
+                        FullName = x.FullName,
+                        StatusFkId = x.StatusFkId,
+                        CreatedOn = x.CreatedOn,
+                        ModifiedOn = x.ModifiedOn,
+                        ParentUserId = x.ParentUserId,
+
+                    }).ToList();
+
+                    baseResponse.rc = result;
+                    baseResponse.rs = 1;
+                    baseResponse.rm = Convert.ToString(EnumMessages.Successful);
                 }
                 else
                 {

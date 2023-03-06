@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using SCW.Services;
+using SCW.Services.SuperAdmin;
 using SCW.uow;
 using System.Text;
 
@@ -8,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<ISuperAccountService, SuperAccountService>();
 builder.Services.AddTransient<IHomeService, HomeService>();
 builder.Services.AddTransient<IAccountService, AccountService>();
 builder.Services.AddTransient<ITokenService, TokenService>();

@@ -98,7 +98,7 @@ namespace SCW.Services
                 if (result.Count > 0)
                 {
 
-                    var responseobj = result.Select(x => new UserList { UserId = x.UserId, FullName = x.FullName, Email = x.Email, StatusFkId = x.StatusFkId }).ToList();
+                    var responseobj = result.Select(x => new UserList { UserId = x.UserId, ParentUserId = x.ParentUserId, FullName = x.FullName, Email = x.Email, StatusFkId = x.StatusFkId }).ToList();
 
 
 
@@ -108,10 +108,11 @@ namespace SCW.Services
                     {
 
 
-                        var UserDTO = result.Select(x => new UserDTO { Id = x.UserId, UserName = x.UserName, FullName = x.FullName, Email = x.Email }).FirstOrDefault();
+                        var UserDTO = result.Select(x => new UserDTO { Id = x.UserId, ParentUserId = x.ParentUserId, UserName = x.UserName, FullName = x.FullName, Email = x.Email }).FirstOrDefault();
 
                         accountResponseModel.id_token = _tokenService.BuildAccessToken(UserDTO);
                         accountResponseModel.IsSAdmin = false;
+                        accountResponseModel.userLists = responseobj;
                         //accountResponseModel.IsCustomer = result.FirstOrDefault().IsCustomer;
                         //accountResponseModel.IsCompany = result.FirstOrDefault().IsCompany;
 
@@ -125,7 +126,7 @@ namespace SCW.Services
 
                         accountResponseModel.id_token = "";
                         accountResponseModel.IsSAdmin = true;
-
+                        accountResponseModel.userLists = responseobj;
                         baseResponse.res = accountResponseModel;
                         baseResponse.rs = Convert.ToInt32(result.FirstOrDefault().ResponseCode);
                         baseResponse.rm = Convert.ToString(result.FirstOrDefault().ResponseMessage);

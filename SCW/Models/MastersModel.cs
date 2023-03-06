@@ -93,6 +93,29 @@ namespace SCW.Models
 
     }
 
+    public class GetUserListModelRequest
+    {
+        public int? currentPage { get; set; }
+        public int? recordsPerPage { get; set; }
+        public string? UserName { get; set; }
+        
+    }
+    public class UserListModelResult
+    {
+        public long? Rownumber { get; set; }
+        public long? TotalRecords { get; set; }
+        public int? Id { get; set; }
+        public string? Email { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? UserName { get; set; }
+        public int? FullName { get; set; }
+        public int? StatusFkId { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? ModifiedOn { get; set; }
+        public int? ParentUserId { get; set; }
+
+       
+    }
 
 
 
