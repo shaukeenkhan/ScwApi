@@ -12,6 +12,7 @@ builder.Services.AddSingleton<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<ISuperAccountService, SuperAccountService>();
 builder.Services.AddTransient<IHomeService, HomeService>();
 builder.Services.AddTransient<IAccountService, AccountService>();
+builder.Services.AddTransient<IEmployeeService, EmployeeService>();
 builder.Services.AddTransient<ITokenService, TokenService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

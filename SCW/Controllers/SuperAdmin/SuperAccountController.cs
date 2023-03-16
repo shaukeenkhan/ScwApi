@@ -32,10 +32,9 @@ namespace SCW.Controllers.SuperAdmin
         }
 
 
-        [HttpGet]
-        [Route("getuserlist")]
+        [HttpPost("getuserlist")]
         [Authorize]
-        public async Task<ActionResult> GetUserList([FromQuery] GetUserListModelRequest request)
+        public async Task<ActionResult> GetUserList(GetUserListModelRequest request)
         {
             BaseResponse<UserListModelResult> response = new BaseResponse<UserListModelResult>();
             response = await this._accountService.GetUserList(request);

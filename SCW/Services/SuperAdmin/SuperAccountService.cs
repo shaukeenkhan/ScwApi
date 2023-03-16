@@ -92,7 +92,7 @@ namespace SCW.Services.SuperAdmin
             try
             {
                 string[] param = { "@currentPage", "@recordsPerPage", "@UserName" };
-                DataTable dt = this._unitOfWork.GetDataFromStoredProcedure("[dbo].[PROC_GET_INSTITUTE]", param, request.currentPage,request.recordsPerPage,request.UserName);
+                DataTable dt = this._unitOfWork.GetDataFromStoredProcedure("[dbo].[S_PROC_GET_USERLIST]", param, request.currentPage,request.recordsPerPage,request.UserName);
 
                 if (dt.Rows.Count > 0)
                 {
